@@ -12,7 +12,7 @@ Run tests and build executable JAR :
 
     mvn clean package
 
-Execute JAR and run web server (port 8080):
+Execute standalone JAR and run web server (port 8080):
 
     java -jar target/spring-boot-rest-api-0.0.1.jar
 
@@ -35,33 +35,33 @@ Array of Objects :
 
 | Name | Type | Mandatory | Description
 |---|---|---|---|
-| name | `String` | Yes | Executed action name
+| name | `String` | Yes | Executed action name aka. Action class Implementation
 | name | `int` | Yes | Action execution order
 
 
 Curl command :
 ```shell
-    curl -X POST \
-    -H "accept: application/json" \
-    "http://localhost:8080/actions/OBSERVATION"
+curl -X POST \
+-H "accept: application/json" \
+"http://localhost:8080/actions/OBSERVATION"
 ```
 
 Sample response (JSON):
 ```JSON
-  [
-    {
-      "name": "DefaultObservationServiceImpl",
-      "order": 1
-    },
-    {
-      "name": "ComputeObservationServiceImpl",
-      "order": 2
-    },
-    {
-      "name": "PublishObservationServiceImpl",
-      "order": 3
-    }
-  ]
+[
+  {
+    "name": "DefaultObservationServiceImpl",
+    "order": 1
+  },
+  {
+    "name": "ComputeObservationServiceImpl",
+    "order": 2
+  },
+  {
+    "name": "PublishObservationServiceImpl",
+    "order": 3
+  }
+]
 ```
 
 
@@ -80,15 +80,15 @@ Display the number of performed `/actions` requests by entity type.
 Curl command :
 
 ```shell
-    curl -H "accept: application/json" \
-    "http://localhost:8080/requests/stats"
+curl -H "accept: application/json" \
+"http://localhost:8080/requests/stats"
 ```
 
 Sample response (JSON):
 ```JSON
-    {
-      "observation": 5,
-      "fact": 0,
-      "event": 3
-    }
+{
+  "observation": 5,
+  "fact": 0,
+  "event": 3
+}
 ```
