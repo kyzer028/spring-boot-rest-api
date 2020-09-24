@@ -11,20 +11,25 @@ import org.springframework.stereotype.Service;
  * Event Default Action Implementation, the one with the lowest priority
  */
 @Service("DefaultEventService")
-public class DefaultEventServiceImpl implements ActionService<Event> {
+public final class DefaultEventServiceImpl implements ActionService<Event> {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(DefaultEventServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultEventServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 1;
 
     @Override
     public int getPriority() {
-        return 1;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Event entity) {
-        logger.info("Perform 'DEFAULT' action on 'EVENT' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'DEFAULT' action on 'EVENT' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override

@@ -8,20 +8,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("PublishObservationService")
-public class PublishObservationServiceImpl implements ActionService<Observation> {
+public final class PublishObservationServiceImpl implements ActionService<Observation> {
+
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(PublishObservationServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PublishObservationServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 3;
 
     @Override
     public int getPriority() {
-        return 3;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Observation entity) {
-        logger.info("Perform 'PUBLISH' action on 'OBSERVATION' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'PUBLISH' action on 'OBSERVATION' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override

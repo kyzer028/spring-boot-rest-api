@@ -45,7 +45,7 @@ public class Observation extends BaseEntity {
      *
      * @param value new value of value.
      */
-    public void setValue(Double value) {
+    public void setValue(final Double value) {
         this.value = value;
     }
 }

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Default implementation of {@link ActionServiceFactory}
  */
 @Service
-public class ActionServiceFactoryImpl implements ActionServiceFactory {
+public final class ActionServiceFactoryImpl implements ActionServiceFactory {
 
     /**
      * Injected ActionServices

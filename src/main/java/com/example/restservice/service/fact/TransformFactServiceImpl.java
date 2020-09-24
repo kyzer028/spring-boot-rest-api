@@ -11,20 +11,25 @@ import org.springframework.stereotype.Service;
  * Fact Transformation Action Implementation
  */
 @Service("TransformFactService")
-public class TransformFactServiceImpl implements ActionService<Fact> {
+public final class TransformFactServiceImpl implements ActionService<Fact> {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(TransformFactServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformFactServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 2;
 
     @Override
     public int getPriority() {
-        return 2;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Fact entity) {
-        logger.info("Perform 'TRANSFORM' action on 'FACT' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'TRANSFORM' action on 'FACT' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override

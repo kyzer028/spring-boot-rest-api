@@ -11,20 +11,25 @@ import org.springframework.stereotype.Service;
  * Event Registration Action Implementation
  */
 @Service("RegisterEventService")
-public class RegisterEventServiceImpl implements ActionService<Event> {
+public final class RegisterEventServiceImpl implements ActionService<Event> {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(RegisterEventServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterEventServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 2;
 
     @Override
     public int getPriority() {
-        return 2;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Event entity) {
-        logger.info("Perform 'REGISTER' action on 'EVENT' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'REGISTER' action on 'EVENT' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override

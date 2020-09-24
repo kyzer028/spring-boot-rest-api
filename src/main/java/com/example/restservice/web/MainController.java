@@ -37,7 +37,7 @@ public final class MainController {
     /**
      * Injected Action Service Factory
      */
-    private final ActionServiceFactory service;
+    private final ActionServiceFactory actionServiceFactory;
 
     /**
      * Main constructor
@@ -46,7 +46,7 @@ public final class MainController {
      */
     @Autowired
     public MainController(final ActionServiceFactory service) {
-        this.service = service;
+        this.actionServiceFactory = service;
     }
 
     /**
@@ -89,7 +89,7 @@ public final class MainController {
 
         final BaseEntity finalEntityToHandle = entityToHandle;
         // perform all actions services to the given entity
-        service.getActionsServicesForEntity(type.getClassType()).forEach(service -> {
+        actionServiceFactory.getActionsServicesForEntity(type.getClassType()).forEach(service -> {
             service.perform(finalEntityToHandle);
             results.add(new ActionResult(service.getClass().getSimpleName(), service.getPriority()));
         });

@@ -11,20 +11,25 @@ import org.springframework.stereotype.Service;
  * Observation Computing Action Implementation
  */
 @Service("ComputeObservationService")
-public class ComputeObservationServiceImpl implements ActionService<Observation> {
+public final class ComputeObservationServiceImpl implements ActionService<Observation> {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(ComputeObservationServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ComputeObservationServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 2;
 
     @Override
     public int getPriority() {
-        return 2;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Observation entity) {
-        logger.info("Perform 'COMPUTING' action on 'OBSERVATION' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'COMPUTING' action on 'OBSERVATION' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override

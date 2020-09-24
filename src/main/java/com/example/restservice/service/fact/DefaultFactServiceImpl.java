@@ -11,20 +11,25 @@ import org.springframework.stereotype.Service;
  * Fact Default Action Implementation, the one with the lowest priority
  */
 @Service("DefaultFactService")
-public class DefaultFactServiceImpl implements ActionService<Fact> {
+public final class DefaultFactServiceImpl implements ActionService<Fact> {
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(DefaultFactServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFactServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 1;
 
     @Override
     public int getPriority() {
-        return 1;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Fact entity) {
-        logger.info("Perform 'DEFAULT' action on 'FACT' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'DEFAULT' action on 'FACT' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override

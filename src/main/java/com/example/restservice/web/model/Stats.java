@@ -9,16 +9,16 @@ public class Stats {
     /**
      * number of api calls for type "OBSERVATION"
      */
-    long observation;
+    private long observation;
     /**
      * number of api calls for type "FACT"
      */
-    long fact;
+    private long fact;
 
     /**
      * number of api calls for type "EVENT"
      */
-    long event;
+    private long event;
 
     /**
      * Gets observation.

@@ -11,21 +11,26 @@ import org.springframework.stereotype.Service;
  * Observation Default Action Implementation, the one with the lowest priority
  */
 @Service("DefaultObservationService")
-public class DefaultObservationServiceImpl implements ActionService<Observation> {
+public final class DefaultObservationServiceImpl implements ActionService<Observation> {
 
     /**
      * Logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(DefaultObservationServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultObservationServiceImpl.class);
+
+    /**
+     * Service priority level
+     */
+    private static final int PRIORITY_LEVEL = 1;
 
     @Override
     public int getPriority() {
-        return 1;
+        return PRIORITY_LEVEL;
     }
 
     @Override
     public void perform(final Observation entity) {
-        logger.info("Perform 'DEFAULT' action on 'OBSERVATION' entity : {}", ReflectionToStringBuilder.toString(entity));
+        LOGGER.info("Perform 'DEFAULT' action on 'OBSERVATION' entity : {}", ReflectionToStringBuilder.toString(entity));
     }
 
     @Override
