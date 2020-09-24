@@ -62,7 +62,7 @@ class MainControllerTests {
         //
         // perform API call
         //
-        mockMvc.perform(post("/api/" + EntityType.OBSERVATION.name()))
+        mockMvc.perform(post("/actions/" + EntityType.OBSERVATION.name()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
@@ -113,19 +113,19 @@ class MainControllerTests {
         final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
         executor.submit(() -> {
             for (int i = 0; i < nbObservationApiCalls; i++) {
-                mockMvc.perform(post("/api/" + EntityType.OBSERVATION.name()));
+                mockMvc.perform(post("/actions/" + EntityType.OBSERVATION.name()));
             }
             return "OBSERVATION DONE";
         });
         executor.submit(() -> {
             for (int i = 0; i < nbFactApiCalls; i++) {
-                mockMvc.perform(post("/api/" + EntityType.FACT.name()));
+                mockMvc.perform(post("/actions/" + EntityType.FACT.name()));
             }
             return "FACT DONE";
         });
         executor.submit(() -> {
             for (int i = 0; i < nbEventApiCalls; i++) {
-                mockMvc.perform(post("/api/" + EntityType.EVENT.name()));
+                mockMvc.perform(post("/actions/" + EntityType.EVENT.name()));
             }
             return "EVENT DONE";
         });

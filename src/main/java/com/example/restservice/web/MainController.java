@@ -55,7 +55,7 @@ public final class MainController {
      * @param type entity type OBSERVATION/FACT/EVENT
      * @return an array of performed action results (class implementation name and order)
      */
-    @PostMapping("/api/{type}")
+    @PostMapping("/actions/{type}")
     public List<ActionResult> performActionsForType(final @PathVariable(value = "type") EntityType type) {
         requestCounters.putIfAbsent(type, new AtomicLong(0));
         requestCounters.get(type).incrementAndGet();
