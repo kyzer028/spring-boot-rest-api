@@ -16,6 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -106,17 +109,29 @@ class MainControllerTests {
         final int nbFactApiCalls = 5;
         final int nbEventApiCalls = 3;
 
-        for (int i = 0; i < nbObservationApiCalls; i++) {
-            mockMvc.perform(post("/api/" + EntityType.OBSERVATION.name()));
-        }
+        // test API calls with concurrency
+        final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
+        executor.submit(() -> {
+            for (int i = 0; i < nbObservationApiCalls; i++) {
+                mockMvc.perform(post("/api/" + EntityType.OBSERVATION.name()));
+            }
+            return "OBSERVATION DONE";
+        });
+        executor.submit(() -> {
+            for (int i = 0; i < nbFactApiCalls; i++) {
+                mockMvc.perform(post("/api/" + EntityType.FACT.name()));
+            }
+            return "FACT DONE";
+        });
+        executor.submit(() -> {
+            for (int i = 0; i < nbEventApiCalls; i++) {
+                mockMvc.perform(post("/api/" + EntityType.EVENT.name()));
+            }
+            return "EVENT DONE";
+        });
 
-        for (int i = 0; i < nbFactApiCalls; i++) {
-            mockMvc.perform(post("/api/" + EntityType.FACT.name()));
-        }
-
-        for (int i = 0; i < nbEventApiCalls; i++) {
-            mockMvc.perform(post("/api/" + EntityType.EVENT.name()));
-        }
+        executor.shutdown();
+        executor.awaitTermination(10, TimeUnit.SECONDS);
 
         this.mockMvc.perform(get("/requests/stats").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
