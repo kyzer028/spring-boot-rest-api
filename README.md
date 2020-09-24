@@ -2,6 +2,13 @@
 
 This is a simple Java REST API based on Spring framework that answers to the prerequisite given by Alexander.
 
+Action services implementations are defined in `service` package under each entity name :
+- event
+- fact
+- observation
+
+A new Actions ervice implementation of interface `ActionService` can be added in the desired package and will be executed without modifying business logic.
+
 ## 1. Developpement
 
 Requirements :
